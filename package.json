@@ -1,0 +1,25 @@
+{
+  "name": "ethereum-javascript-dapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@truffle/contract": "^4.3.21",
+    "bootstrap": "^5.0.2",
+    "chai": "^4.3.4",
+    "chai-as-promised": "^7.1.1",
+    "chai-bignumber": "^3.0.0",
+    "lite-server": "^2.6.1",
+    "nodemon": "^2.0.7",
+    "truffle": "^5.3.12"
+  }
+}
