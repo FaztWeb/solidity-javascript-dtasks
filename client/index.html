@@ -6,16 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TasksApp | DApp</title>
     <link rel="stylesheet" href="/libs/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./main.css">
   </head>
   <body>
 
     <h1>Dapp</h1>
 
+    <form id="taskForm">
+      <input type="text" id="newTask">
+      <button>save</button>
+    </form>
+
     <div id="account"></div>
 
     <div id="tasksList"></div>
 
-    <script src="/libs/web3/dist/web3.min.js"></script>
+    <!-- <script src="/libs/web3/dist/web3.min.js"></script> -->
     <script src="/libs/@truffle/contract/dist/truffle-contract.min.js"></script>
     <script src="./index.js"></script>
   </body>

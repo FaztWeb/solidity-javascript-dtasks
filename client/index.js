@@ -1,10 +1,6 @@
 App = {
   contracts: {},
   load: async () => {
-    console.table({
-      web3: Web3.version,
-      provider: Web3.givenProvider,
-    });
     await App.loadWeb3();
     await App.loadAccount();
     await App.loadContract();
@@ -13,15 +9,10 @@ App = {
   },
   loadWeb3: async () => {
     if (window.ethereum) {
-      window.web3 = new Web3(ethereum);
-      try {
-        await window.ethereum.request({ method: "eth_requestAccounts" });
-        App.web3Provider = window.web3.currentProvider;
-      } catch (error) {
-        if (error.code === 4001) {
-          // User rejected request
-        }
-      }
+      App.web3Provider = window.ethereum;
+      await window.ethereum.request({ method: "eth_requestAccounts" });
+    } else if (web3) {
+      web3 = new Web3(window.web3.currentProvider);
     } else {
       console.log(
         "No ethereum browser is installed. Try it installing MetaMask "
@@ -29,9 +20,10 @@ App = {
     }
   },
   loadAccount: async () => {
-    let accounts = await window.web3.eth.getAccounts();
+    const accounts = await window.ethereum.request({
+      method: "eth_requestAccounts",
+    });
     App.account = accounts[0];
-    console.log(App.account);
   },
   loadContract: async () => {
     try {
@@ -51,13 +43,13 @@ App = {
   renderTasks: async () => {
     const tasksCounter = await App.tasksContract.tasksCounter();
     const taskCounterNumber = tasksCounter.toNumber();
-    console.log({taskCounterNumber})
+    console.log({ taskCounterNumber });
 
-    let html = '';
+    let html = "";
 
     for (let i = 1; i <= taskCounterNumber; i++) {
       const task = await App.tasksContract.tasks(i);
-      console.log(task)
+      console.log(task);
       const taskId = task[0].toNumber();
       const taskContent = task[1];
       const taskDone = task[2];
@@ -71,8 +63,25 @@ App = {
 
     document.querySelector("#tasksList").innerHTML = html;
   },
+  createTask: async (content) => {
+    try {
+      const result = await App.tasksContract.createTask(content, {
+        from: App.account,
+      });
+      // console.log(result.logs[0].args)
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
+    }
+  },
 };
 
 document.addEventListener("DOMContentLoaded", () => {
   App.load();
+});
+
+document.querySelector("#taskForm").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const content = document.querySelector("#newTask").value;
+  App.createTask(content);
 });

@@ -1,3 +1,5 @@
+const { assert } = require("chai");
+
 const TasksContract = artifacts.require("TasksContract");
 
 contract("TasksContract", (accounts) => {
@@ -21,5 +23,16 @@ contract("TasksContract", (accounts) => {
     assert.equal(task.content, "first task");
     assert.equal(task.done, false);
     assert.equal(tasksCounter, 1);
+  });
+
+  it("task created successfully", async () => {
+    const result = await this.tasksContract.createTask("some task");
+    const tasksCounter = await this.tasksContract.tasksCounter();
+    const taskEvent = result.logs[0].args;
+
+    assert.equal(tasksCounter, 2);
+    assert.equal(taskEvent.id.toNumber(), 2);
+    assert.equal(taskEvent.content, "some task");
+    assert.equal(taskEvent.done, false);
   });
 });

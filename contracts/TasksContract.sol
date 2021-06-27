@@ -10,6 +10,8 @@ contract TasksContract {
         bool done;
     }
 
+    event TaskCreated(uint256 id, string content, bool done);
+
     mapping(uint256 => Task) public tasks;
 
     constructor() {
@@ -19,5 +21,6 @@ contract TasksContract {
     function createTask(string memory _content) public {
         tasksCounter++;
         tasks[tasksCounter] = Task(tasksCounter, _content, false);
+        emit TaskCreated(tasksCounter, _content, false);
     }
 }
