@@ -7,7 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "lite-server",
+    "test": "truffle test"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +21,7 @@
     "chai-bignumber": "^3.0.0",
     "lite-server": "^2.6.1",
     "nodemon": "^2.0.7",
-    "truffle": "^5.3.12"
+    "truffle": "^5.3.12",
+    "web3": "^1.3.6"
   }
 }
