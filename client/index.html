@@ -5,24 +5,58 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TasksApp | DApp</title>
-    <link rel="stylesheet" href="/libs/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./main.css">
+    <link rel="stylesheet" href="/libs/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./main.css" />
+    <!-- Google icons -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
   </head>
   <body>
+    <div class="container py-5">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card card-body bg-dark rounded-0 mb-4">
+            <h1>
+              <span class="material-icons"> grid_view </span>
+              DTasksapp
+            </h1>
+            <h6 class="text-muted">Decentralize Tasks App</h6>
+            <div class="d-flex align-items-center">
+              <span class="material-icons"> account_balance_wallet </span>
+              <span class="ms-2">Wallet</span>
+            </div>
+            <span id="account"></span>
+          </div>
 
-    <h1>Dapp</h1>
-
-    <form id="taskForm">
-      <input type="text" id="newTask">
-      <button>save</button>
-    </form>
-
-    <div id="account"></div>
-
-    <div id="tasksList"></div>
+          <form id="taskForm" class="card card-body bg-dark">
+            <h4>Save a Task</h4>
+            <input
+              type="text"
+              id="title"
+              class="form-control bg-dark border-0 rounded-0 text-light my-4"
+              placeholder="Write a Task"
+              autofocus
+            />
+            <textarea
+              id="description"
+              rows="2"
+              class="form-control bg-dark border-0 rounded-0 text-light my-4"
+              placeholder="I have to do ...."
+            ></textarea>
+            <button class="btn btn-primary">save</button>
+          </form>
+        </div>
+        <div class="col-md-8">
+          <div id="tasksList"></div>
+        </div>
+      </div>
+    </div>
 
     <!-- <script src="/libs/web3/dist/web3.min.js"></script> -->
     <script src="/libs/@truffle/contract/dist/truffle-contract.min.js"></script>
-    <script src="./index.js"></script>
+    <script src="./app.js"></script>
+    <script src="./ui.js"></script>
   </body>
 </html>
